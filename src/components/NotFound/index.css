@@ -1,0 +1,24 @@
+.not-found-con {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: black;
+}
+.bad-path {
+  font-size: 40px;
+  font-family: roboto;
+  font-weight: bold;
+  color: white;
+  line-height: 10px;
+}
+.not-desc {
+  font-size: 10px;
+  color: white;
+  font-family: roboto;
+}
+.not-found-img{
+  height: 200px;
+  width: 200px;
+}

@@ -1,0 +1,120 @@
+.jobs-container {
+  background-color: black;
+  width: 100%;
+  display: flex;
+  padding: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.left-con {
+  width: 30%;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+@media (max-width: 767px) {
+  .jobs-container {
+    background-color: black;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .left-con {
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+  .right-con {
+    width: 100%;
+  }
+}
+.type-heading {
+  color: white;
+  font-family: roboto;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.labell {
+  color: white;
+}
+.unordered-radio {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.radio-list {
+  margin-bottom: 5px;
+}
+.right-con {
+  width: 70%;
+}
+.search-input {
+  background-color: transparent;
+  border: 2px solid grey;
+  border-right: none;
+  height: 40px;
+  width: 50%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin-bottom: 50px;
+  padding-left: 10px;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.search-button {
+  height: 40px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 39px;
+  cursor: pointer;
+  border: 0;
+  background-color: #202020;
+}
+.inpt-con {
+  display: none;
+}
+.input-con {
+  display: block;
+  margin-left: 20px;
+}
+@media (max-width: 767px) {
+  .inpt-con {
+    display: block;
+  }
+  .input-con {
+    display: none;
+  }
+  .unordered-job-details-con {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+.unordered-job-details-con {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.jobs-failure-con {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.fai-img {
+  height: 60vh;
+  width: 50%;
+}
+.jobs-failure-heading {
+  font-family: roboto;
+  font-weight: bold;
+  color: white;
+  font-size: 50px;
+  line-height: 10px;
+}
+.job-failure-para {
+  color: white;
+  font-size: 8px;
+}

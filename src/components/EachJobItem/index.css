@@ -1,0 +1,111 @@
+.job-item-details {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  padding: 30px;
+  width: 100%;
+}
+.each-job-details-container {
+  background-color: #202020;
+  padding: 20px;
+  border-radius: 6px;
+  margin: 20px;
+  width: 100%;
+  color: white;
+}
+.anchor-con {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.anchor {
+  text-decoration: none;
+}
+.unordered-skills {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.skill-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 30%;
+  margin-bottom: 30px;
+}
+@media (max-width: 767px) {
+  .skill-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 45%;
+    margin-bottom: 30px;
+  }
+  .skill-img {
+    width: 20px;
+    height: 20px;
+  }
+  .skill-name {
+    padding-left: 10px;
+    font-family: roboto;
+    font-size: 14px;
+  }
+}
+.skill-img {
+  width: 70px;
+  height: 70px;
+}
+.skill-name {
+  padding-left: 10px;
+  font-family: roboto;
+}
+.life-at-company-con {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+@media (max-width: 767px) {
+  .life-at-company-con {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+.life-at-company-description {
+  width: 60%;
+  font-family: roboto;
+  padding-right: 20px;
+}
+.life-at-company-img {
+  width: 30%;
+  height: 30%;
+}
+.similar-jobs-heading {
+  color: white;
+  font-family: roboto;
+  font-weight: bold;
+}
+.unordered-similar-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.jobs-itemfailure-con {
+  background-color: black;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.job-itemloader-container{
+  background-color: black;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
