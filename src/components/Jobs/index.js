@@ -28,6 +28,29 @@ const employmentTypesList = [
   },
 ]
 
+const locationList = [
+  {
+    label: 'Bangalore',
+    locationId: 'BANGALORE',
+  },
+  {
+    label: 'Hyderabad',
+    locationId: 'HYDERABAD',
+  },
+  {
+    label: 'Chennai',
+    locationId: 'CHENNAI',
+  },
+  {
+    label: 'Delhi',
+    locationId: 'DELHI',
+  },
+  {
+    label: 'Mumbai',
+    locationId: 'MUMBAI',
+  },
+]
+
 const salaryRangesList = [
   {
     salaryRangeId: '1000000',
@@ -57,6 +80,7 @@ class Jobs extends Component {
     apiStatus: apiStatusConstants.initial,
     searchInput: '',
     checkboxInputs: [],
+    locationInput: [],
     jobsDetails: [],
     activeSalaryId: '',
   }
@@ -69,7 +93,8 @@ class Jobs extends Component {
     this.setState({apiStatus: apiStatusConstants.inProgress})
     const jwtToken = Cookies.get('jwt_token')
     const {searchInput, checkboxInputs, activeSalaryId} = this.state
-    const url = `https://apis.ccbp.in/jobs?employment_type=${checkboxInputs}&minimum_package=${activeSalaryId}&search=${searchInput}`
+    const {locationInput} = this.state
+    const url = `https://apis.ccbp.in/jobs?employment_type=${checkboxInputs}&minimum_package=${activeSalaryId}&location=${locationInput}&search=${searchInput}`
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -99,13 +124,13 @@ class Jobs extends Component {
   }
 
   renderLoadingView = () => (
-    <div className="loader-container" data-testid="loader">
+    <div className='loader-container' data-testid='loader'>
       <Loader
-        className="loader"
-        type="ThreeDots"
-        color="#ffffff"
-        height="50"
-        width="50"
+        className='loader'
+        type='ThreeDots'
+        color='#ffffff'
+        height='50'
+        width='50'
       />
     </div>
   )
@@ -138,22 +163,46 @@ class Jobs extends Component {
     }
   }
 
+  onChangeLoations = event => {
+    const {locationInput} = this.state
+    const inputNotInList = locationInput.filter(
+      each => each === event.target.id,
+    )
+    if (inputNotInList.length === 0) {
+      this.setState(
+        prevState => ({
+          locationInput: [...prevState.locationInput, event.target.id],
+        }),
+        this.onGetJobDetails,
+      )
+    } else {
+      const filteredData = locationInput.filter(
+        each => each !== each.event.target.id,
+      )
+      this.setState(
+        // eslint-disable-next-line no-unused-vars
+        prevState => ({locationInput: filteredData}),
+        this.onGetJobDetails,
+      )
+    }
+  }
+
   clickRetry = () => {
     this.onGetJobDetails()
   }
 
   renderFailureView = () => (
-    <div className="jobs-failure-con">
+    <div className='jobs-failure-con'>
       <img
-        className="fai-img"
-        alt="failure view"
-        src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
+        className='fai-img'
+        alt='failure view'
+        src='https://assets.ccbp.in/frontend/react-js/failure-img.png'
       />
-      <h1 className="jobs-failure-heading">Oops! Something Went Wrong</h1>
-      <p className="job-failure-para">
+      <h1 className='jobs-failure-heading'>Oops! Something Went Wrong</h1>
+      <p className='job-failure-para'>
         We cannot seem to find the page you are looking for
       </p>
-      <button onClick={this.clickRetry} type="button" className="retry-button">
+      <button onClick={this.clickRetry} type='button' className='retry-button'>
         Retry
       </button>
     </div>
@@ -165,17 +214,17 @@ class Jobs extends Component {
     return (
       <>
         {length ? (
-          <div className="no-jobs-container">
+          <div className='no-jobs-container'>
             <img
-              className="no-jobs-img"
-              src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
-              alt="no jobs"
+              className='no-jobs-img'
+              src='https://assets.ccbp.in/frontend/react-js/no-jobs-img.png'
+              alt='no jobs'
             />
             <h1>No jobs found</h1>
             <p>We could not find any jobs. Try other filters.</p>
           </div>
         ) : (
-          <ul className="unordered-job-details-con">
+          <ul className='unordered-job-details-con'>
             {jobsDetails.map(each => (
               <JobItem eachJobDetails={each} key={each.id} />
             ))}
@@ -219,77 +268,94 @@ class Jobs extends Component {
       <>
         <Header />
 
-        <div className="jobs-container">
-          <div className="left-con">
-            <div className="inpt-con">
+        <div className='jobs-container'>
+          <div className='left-con'>
+            <div className='inpt-con'>
               <input
                 onChange={this.onSearchInput}
                 onKeyDown={this.onKeyDownInput}
-                className="search-input"
+                className='search-input'
                 value={searchInput}
-                placeholder="Search"
-                type="search"
+                placeholder='Search'
+                type='search'
               />
               <button
-                data-testid="searchButton"
-                className="search-button"
-                type="button"
+                data-testid='searchButton'
+                className='search-button'
+                type='button'
                 onClick={this.onClickSearch}
               >
                 <AiOutlineSearch />
               </button>
             </div>
             <Profile />
-            <hr className="hori-line" />
-            <h1 className="type-heading">Type of Employment</h1>
-            <ul className="unordered-checkbox">
+            <hr className='hori-line' />
+            <h1 className='type-heading'>Type of Employment</h1>
+            <ul className='unordered-checkbox'>
               {employmentTypesList.map(each => (
-                <li key={each.employmentTypeId} className="checkbox-list">
+                <li key={each.employmentTypeId} className='checkbox-list'>
                   <input
-                    type="checkbox"
+                    type='checkbox'
                     id={each.employmentTypeId}
-                    className="input"
+                    className='input'
                     onChange={this.onGetInputOption}
                   />
-                  <label className="labell" htmlFor={each.employmentTypeId}>
+                  <label className='labell' htmlFor={each.employmentTypeId}>
                     {each.label}
                   </label>
                 </li>
               ))}
             </ul>
-            <hr className="hori-line" />
-            <h1 className="type-heading">Salary Range</h1>
-            <ul className="unordered-radio">
+            <hr className='hori-line' />
+            <h1 className='type-heading'>Salary Range</h1>
+            <ul className='unordered-radio'>
               {salaryRangesList.map(each => (
-                <li key={each.salaryRangeId} className="radio-list">
+                <li key={each.salaryRangeId} className='radio-list'>
                   <input
-                    name="option"
+                    name='option'
                     onChange={this.onGetRadioOption}
-                    className="radio"
-                    type="radio"
+                    className='radio'
+                    type='radio'
                     id={each.salaryRangeId}
                   />
-                  <label htmlFor={each.salaryRangeId} className="label">
+                  <label htmlFor={each.salaryRangeId} className='label'>
+                    {each.label}
+                  </label>
+                </li>
+              ))}
+            </ul>
+            <hr className='hori-line' />
+            <h1 className='type-heading'>Location</h1>
+            <ul className='unordered-checkbox'>
+              {locationList.map(each => (
+                <li key={each.locationId} className='checkbox-list'>
+                  <input
+                    type='checkbox'
+                    id={each.locationId}
+                    className='input'
+                    onChange={this.onChangeLoations}
+                  />
+                  <label className='label' htmlFor={each.locationId}>
                     {each.label}
                   </label>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="right-con">
-            <div className="input-con">
+          <div className='right-con'>
+            <div className='input-con'>
               <input
                 onChange={this.onSearchInput}
                 onKeyDown={this.onKeyDownInput}
-                className="search-input"
+                className='search-input'
                 value={searchInput}
-                placeholder="Search"
-                type="search"
+                placeholder='Search'
+                type='search'
               />
               <button
-                data-testid="searchButton"
-                className="search-button"
-                type="button"
+                data-testid='searchButton'
+                className='search-button'
+                type='button'
                 onClick={this.onClickSearch}
               >
                 <AiOutlineSearch />
